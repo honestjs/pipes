@@ -1,0 +1,46 @@
+{
+	"name": "@honestjs/class-validator-pipe",
+	"version": "0.2.0",
+	"description": "Class validator pipe for HonestJS framework",
+	"main": "./dist/index.js",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"clean": "rm -rf dist",
+		"type-check": "tsc --noEmit"
+	},
+	"keywords": [
+		"honestjs",
+		"pipe",
+		"validation",
+		"class-validator"
+	],
+	"author": "Orkhan Karimov <karimovok1@gmail.com> (https://github.com/kerimovok)",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/honestjs/pipes.git",
+		"directory": "packages/class-validator-pipe"
+	},
+	"dependencies": {
+		"http-essentials": "^1.0.0"
+	},
+	"devDependencies": {},
+	"peerDependencies": {
+		"honestjs": "^0.1.0",
+		"class-transformer": "^0.5.1",
+		"class-validator": "^0.14.1"
+	}
+}
