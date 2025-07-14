@@ -1,1 +1,1 @@
-export * from './class-validation.pipe'
+export * from './class-validator.pipe'

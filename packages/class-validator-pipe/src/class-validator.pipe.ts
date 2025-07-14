@@ -11,75 +11,17 @@ import { BadRequestException } from 'http-essentials'
  * for complex object structures with support for nested validation, custom rules, and
  * automatic type transformation.
  *
- * @example
- * ```typescript
- * import { ClassValidationPipe } from '@honestjs/class-validator-pipe'
- * import { IsEmail, IsString, MinLength } from 'class-validator'
- *
- * class CreateUserDto {
- *   @IsString()
- *   @MinLength(2)
- *   name: string
- *
- *   @IsEmail()
- *   email: string
- * }
- *
- * // Use in a controller method
- * @Post('/users')
- * async createUser(@Body(new ClassValidationPipe()) userData: CreateUserDto) {
- *   // userData is now validated and transformed to CreateUserDto instance
- *   return this.userService.create(userData)
- * }
- * ```
- *
- * @example
- * Custom validation options:
- * ```typescript
- * const pipe = new ClassValidationPipe(
- *   {
- *     whitelist: true,
- *     forbidNonWhitelisted: true,
- *     transform: true
- *   },
- *   {
- *     enableImplicitConversion: true,
- *     excludeExtraneousValues: true
- *   }
- * )
- * ```
  */
-export class ClassValidationPipe implements IPipe {
+export class ClassValidatorPipe implements IPipe {
 	private readonly validatorOptions: ValidatorOptions
 	private readonly transformOptions: ClassTransformOptions
 
 	/**
-	 * Creates a new ClassValidationPipe instance.
+	 * Creates a new ClassValidatorPipe instance.
 	 *
 	 * @param validatorOptions - Options for class-validator validation behavior
 	 * @param transformOptions - Options for class-transformer transformation behavior
 	 *
-	 * @example
-	 * ```typescript
-	 * // Basic usage with default options
-	 * const pipe = new ClassValidationPipe()
-	 *
-	 * // Custom validation options
-	 * const strictPipe = new ClassValidationPipe({
-	 *   whitelist: true,           // Remove non-decorated properties
-	 *   forbidNonWhitelisted: true, // Throw error for extra properties
-	 *   transform: true            // Enable automatic transformation
-	 * })
-	 *
-	 * // Custom transformation options
-	 * const transformPipe = new ClassValidationPipe(
-	 *   {},
-	 *   {
-	 *     enableImplicitConversion: true,    // Auto-convert types
-	 *     excludeExtraneousValues: true     // Remove extra properties
-	 *   }
-	 * )
-	 * ```
 	 */
 	constructor(validatorOptions: ValidatorOptions = {}, transformOptions: ClassTransformOptions = {}) {
 		this.validatorOptions = {
@@ -108,18 +50,8 @@ export class ClassValidationPipe implements IPipe {
 	 * @returns The validated and transformed class instance
 	 * @throws BadRequestException when validation fails or invalid data is provided
 	 *
-	 * @example
-	 * ```typescript
-	 * // This happens automatically when used as a pipe
-	 * const result = await pipe.transform(
-	 *   { name: 'John', email: 'john@example.com' },
-	 *   { metatype: CreateUserDto, type: 'body', data: undefined }
-	 * )
-	 * // result is now a CreateUserDto instance with validated data
-	 * ```
 	 */
 	async transform(value: unknown, metadata: ArgumentMetadata): Promise<unknown> {
-		// Resolve the value if it's a Promise
 		let resolvedValue = value
 		if (value instanceof Promise) {
 			try {
@@ -129,24 +61,19 @@ export class ClassValidationPipe implements IPipe {
 			}
 		}
 
-		// Skip validation if no metatype or if it's a primitive type
 		if (!metadata.metatype || !this.toValidate(metadata.metatype)) {
 			return resolvedValue
 		}
 
-		// Handle null/undefined values
 		if (resolvedValue === null || resolvedValue === undefined) {
 			return resolvedValue
 		}
 
 		try {
-			// Transform the value to an instance of the DTO class
 			const object = plainToInstance(metadata.metatype, resolvedValue, this.transformOptions)
 
-			// Validate the transformed object
 			const errors = await validate(object as object, this.validatorOptions)
 
-			// If there are validation errors, throw a BadRequestException
 			if (errors.length > 0) {
 				const errorMessage = this.buildErrorMessages(errors).join('; ')
 				throw new BadRequestException(errorMessage)
@@ -154,12 +81,10 @@ export class ClassValidationPipe implements IPipe {
 
 			return object
 		} catch (error) {
-			// If it's already a BadRequestException, rethrow it
 			if (error instanceof BadRequestException) {
 				throw error
 			}
 
-			// Otherwise, log the error and throw a generic BadRequestException
 			throw new BadRequestException('Validation failed')
 		}
 	}
@@ -188,12 +113,6 @@ export class ClassValidationPipe implements IPipe {
 	 * @param metatype - The constructor function to check
 	 * @returns True if the type should be validated, false for primitive types
 	 *
-	 * @example
-	 * ```typescript
-	 * pipe.toValidate(String)     // false - primitive type
-	 * pipe.toValidate(Number)     // false - primitive type
-	 * pipe.toValidate(CreateUserDto) // true - class with decorators
-	 * ```
 	 */
 	private toValidate(metatype: Function): boolean {
 		const types: Function[] = [String, Boolean, Number, Array, Object]
