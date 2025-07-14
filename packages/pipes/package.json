@@ -23,9 +23,9 @@
 	},
 	"keywords": [
 		"honestjs",
-		"pipe",
-		"validation",
-		"primitive"
+		"hono",
+		"nestjs",
+		"pipe"
 	],
 	"author": "Orkhan Karimov <karimovok1@gmail.com> (https://github.com/kerimovok)",
 	"license": "MIT",
@@ -37,7 +37,9 @@
 	"dependencies": {
 		"http-essentials": "^1.0.0"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"honestjs": "^0.1.0"
+	},
 	"peerDependencies": {
 		"honestjs": "^0.1.0"
 	}

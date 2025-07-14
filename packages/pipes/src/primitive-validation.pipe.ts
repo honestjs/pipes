@@ -8,34 +8,6 @@ import { BadRequestException } from 'http-essentials'
  * with configurable transformation options. It's particularly useful for handling query parameters,
  * path parameters, and other simple data that needs type coercion from strings to their proper types.
  *
- * @example
- * ```typescript
- * import { PrimitiveValidationPipe } from '@honestjs/primitive-validator-pipe'
- *
- * // Use in a controller method for automatic type conversion
- * @Get('/users/:id')
- * async getUser(@Param('id', new PrimitiveValidationPipe()) id: number) {
- *   // id is automatically converted from string to number
- *   return this.userService.findById(id)
- * }
- *
- * @Get('/posts')
- * async getPosts(@Query('published', new PrimitiveValidationPipe()) published: boolean) {
- *   // 'true', 'false', '1', '0' etc. are converted to boolean
- *   return this.postService.findAll({ published })
- * }
- * ```
- *
- * @example
- * Custom transformation options:
- * ```typescript
- * // Only transform numbers, leave strings and booleans as-is
- * const numberOnlyPipe = new PrimitiveValidationPipe({
- *   transformNumber: true,
- *   transformString: false,
- *   transformBoolean: false
- * })
- * ```
  */
 export class PrimitiveValidationPipe implements IPipe {
 	/**
@@ -46,25 +18,6 @@ export class PrimitiveValidationPipe implements IPipe {
 	 * @param options.transformNumber - Whether to transform values to number (default: true)
 	 * @param options.transformString - Whether to transform values to string (default: true)
 	 *
-	 * @example
-	 * ```typescript
-	 * // Default behavior - transform all primitive types
-	 * const pipe = new PrimitiveValidationPipe()
-	 *
-	 * // Custom configuration - only transform numbers
-	 * const numberPipe = new PrimitiveValidationPipe({
-	 *   transformNumber: true,
-	 *   transformString: false,
-	 *   transformBoolean: false
-	 * })
-	 *
-	 * // Strict mode - no automatic transformations
-	 * const strictPipe = new PrimitiveValidationPipe({
-	 *   transformNumber: false,
-	 *   transformString: false,
-	 *   transformBoolean: false
-	 * })
-	 * ```
 	 */
 	constructor(
 		private readonly options: {
@@ -90,23 +43,6 @@ export class PrimitiveValidationPipe implements IPipe {
 	 * @returns The transformed value matching the expected type
 	 * @throws BadRequestException when transformation fails or invalid data is provided
 	 *
-	 * @example
-	 * ```typescript
-	 * // String transformation
-	 * await pipe.transform(123, { metatype: String, type: 'param' })
-	 * // Returns: "123"
-	 *
-	 * // Number transformation
-	 * await pipe.transform("42", { metatype: Number, type: 'param' })
-	 * // Returns: 42
-	 *
-	 * // Boolean transformation
-	 * await pipe.transform("true", { metatype: Boolean, type: 'query' })
-	 * // Returns: true
-	 *
-	 * await pipe.transform("false", { metatype: Boolean, type: 'query' })
-	 * // Returns: false
-	 * ```
 	 */
 	async transform(value: unknown, metadata: ArgumentMetadata): Promise<unknown> {
 		// Resolve promise if value is a Promise
@@ -152,25 +88,6 @@ export class PrimitiveValidationPipe implements IPipe {
 	 * @returns The transformed value
 	 * @throws BadRequestException when conversion fails
 	 *
-	 * @example
-	 * ```typescript
-	 * // Number conversion examples
-	 * transformValue("123", Number)     // Returns: 123
-	 * transformValue("12.5", Number)    // Returns: 12.5
-	 * transformValue("abc", Number)     // Throws: BadRequestException
-	 *
-	 * // Boolean conversion examples
-	 * transformValue("true", Boolean)   // Returns: true
-	 * transformValue("false", Boolean)  // Returns: false
-	 * transformValue("1", Boolean)      // Returns: true
-	 * transformValue("0", Boolean)      // Returns: false
-	 * transformValue("yes", Boolean)    // Returns: true
-	 * transformValue("no", Boolean)     // Returns: false
-	 *
-	 * // String conversion examples
-	 * transformValue(123, String)       // Returns: "123"
-	 * transformValue(true, String)      // Returns: "true"
-	 * ```
 	 */
 	private transformValue(value: unknown, metatype: Function): unknown {
 		// String validation and transformation
