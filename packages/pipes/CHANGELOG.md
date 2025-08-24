@@ -1,5 +1,11 @@
 # @honestjs/pipes
 
+## 1.0.2
+
+### Patch Changes
+
+- 705555b: Update deps
+
 ## 1.0.1
 
 ### Patch Changes

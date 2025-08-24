@@ -1,5 +1,11 @@
 # @honestjs/class-validator-pipe
 
+## 1.1.1
+
+### Patch Changes
+
+- 705555b: Update deps
+
 ## 1.1.0
 
 ### Minor Changes
