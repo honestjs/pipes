@@ -110,6 +110,9 @@ export class PrimitiveValidationPipe implements IPipe {
 				return value
 			}
 			if (typeof value === 'string') {
+				if (value.trim().length === 0) {
+					throw new BadRequestException('Expected a numeric value but received an empty string')
+				}
 				const parsedValue = Number(value)
 				if (isNaN(parsedValue)) {
 					throw new BadRequestException(`Cannot convert '${value}' to a number`)

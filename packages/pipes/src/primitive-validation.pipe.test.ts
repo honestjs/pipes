@@ -85,9 +85,16 @@ describe('PrimitiveValidationPipe', () => {
 			expect(await pipe.transform('  123  ', metadata(Number))).toBe(123)
 		})
 
-		it('parses empty string as 0', async () => {
+		it('throws for empty string as number', async () => {
 			const pipe = new PrimitiveValidationPipe()
-			expect(await pipe.transform('', metadata(Number))).toBe(0)
+			await expect(pipe.transform('', metadata(Number))).rejects.toThrow(BadRequestException)
+			await expect(pipe.transform('', metadata(Number))).rejects.toThrow('empty string')
+		})
+
+		it('throws for whitespace-only string as number', async () => {
+			const pipe = new PrimitiveValidationPipe()
+			await expect(pipe.transform('  ', metadata(Number))).rejects.toThrow(BadRequestException)
+			await expect(pipe.transform('  ', metadata(Number))).rejects.toThrow('empty string')
 		})
 
 		it('throws for invalid numeric string', async () => {
