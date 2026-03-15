@@ -1,5 +1,13 @@
 # @honestjs/pipes
 
+## 1.1.0
+
+### Minor Changes
+
+- e51b7a4: - Improve error messages with metadata type prefix when available
+    - Add comprehensive unit tests for all primitive transformations and edge cases
+    - Expand README with options, recipes, and troubleshooting
+
 ## 1.0.3
 
 ### Patch Changes
