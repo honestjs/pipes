@@ -44,7 +44,7 @@
 	"devDependencies": {
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.4",
-		"honestjs": "^0.1.10",
+		"honestjs": "^0.1.11",
 		"reflect-metadata": "^0.2.2",
 		"vitest": "^3.2.4"
 	},
