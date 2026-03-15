@@ -22,7 +22,8 @@
 		"type-check": "tsc --noEmit",
 		"test": "vitest run",
 		"test:watch": "vitest",
-		"lint": "prettier --check ."
+		"lint": "prettier --check .",
+		"prepack": "pnpm run build"
 	},
 	"keywords": [
 		"honestjs",
@@ -43,7 +44,7 @@
 	"devDependencies": {
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.4",
-		"honestjs": "^0.1.6",
+		"honestjs": "^0.1.10",
 		"reflect-metadata": "^0.2.2",
 		"vitest": "^3.2.4"
 	},
