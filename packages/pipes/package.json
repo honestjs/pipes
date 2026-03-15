@@ -19,7 +19,10 @@
 		"build": "tsup",
 		"dev": "tsup --watch",
 		"clean": "rm -rf dist",
-		"type-check": "tsc --noEmit"
+		"type-check": "tsc --noEmit",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"lint": "prettier --check ."
 	},
 	"keywords": [
 		"honestjs",
@@ -38,7 +41,8 @@
 		"http-essentials": "^1.3.1"
 	},
 	"devDependencies": {
-		"honestjs": "^0.1.6"
+		"honestjs": "^0.1.6",
+		"vitest": "^3.2.4"
 	},
 	"peerDependencies": {
 		"honestjs": "^0.1.0"

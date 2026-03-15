@@ -12,6 +12,11 @@ import { BadRequestException } from 'http-essentials'
  * automatic type transformation.
  *
  */
+export interface ClassValidatorPipeOptions {
+	validator?: ValidatorOptions
+	transform?: ClassTransformOptions
+}
+
 export class ClassValidatorPipe implements IPipe {
 	private readonly validatorOptions: ValidatorOptions
 	private readonly transformOptions: ClassTransformOptions
@@ -19,19 +24,17 @@ export class ClassValidatorPipe implements IPipe {
 	/**
 	 * Creates a new ClassValidatorPipe instance.
 	 *
-	 * @param validatorOptions - Options for class-validator validation behavior
-	 * @param transformOptions - Options for class-transformer transformation behavior
-	 *
+	 * @param options - Options for validator and transform behavior
 	 */
-	constructor(validatorOptions: ValidatorOptions = {}, transformOptions: ClassTransformOptions = {}) {
+	constructor(options: ClassValidatorPipeOptions = {}) {
 		this.validatorOptions = {
 			whitelist: true,
 			forbidNonWhitelisted: false,
-			...validatorOptions
+			...options.validator
 		}
 		this.transformOptions = {
 			enableImplicitConversion: true,
-			...transformOptions
+			...options.transform
 		}
 	}
 
@@ -76,7 +79,7 @@ export class ClassValidatorPipe implements IPipe {
 
 			if (errors.length > 0) {
 				const errorMessage = this.buildErrorMessages(errors).join('; ')
-				throw new BadRequestException(errorMessage)
+				throw new BadRequestException(errorMessage || 'Validation failed')
 			}
 
 			return object
@@ -85,7 +88,8 @@ export class ClassValidatorPipe implements IPipe {
 				throw error
 			}
 
-			throw new BadRequestException('Validation failed')
+			const message = error instanceof Error ? error.message : 'Validation failed'
+			throw new BadRequestException(message)
 		}
 	}
 

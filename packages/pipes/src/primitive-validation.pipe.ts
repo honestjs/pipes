@@ -71,7 +71,9 @@ export class PrimitiveValidationPipe implements IPipe {
 			if (error instanceof BadRequestException) {
 				throw error
 			}
-			throw new BadRequestException(`Failed to validate ${metadata.type}: ${(error as Error).message}`)
+			const msg = error instanceof Error ? error.message : 'Unknown error'
+			const prefix = metadata.type ? `Failed to validate ${metadata.type}: ` : 'Validation failed: '
+			throw new BadRequestException(prefix + msg)
 		}
 	}
 
