@@ -1,5 +1,11 @@
 # @honestjs/class-validator-pipe
 
+## 1.3.1
+
+### Patch Changes
+
+- ce0cb81: Update honestjs dependency to version 0.1.14
+
 ## 1.3.0
 
 ### Minor Changes
