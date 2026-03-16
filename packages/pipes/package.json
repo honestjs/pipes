@@ -42,7 +42,7 @@
 		"http-essentials": "^1.4.0"
 	},
 	"devDependencies": {
-		"honestjs": "^0.1.13",
+		"honestjs": "^0.1.14",
 		"vitest": "^3.2.4"
 	},
 	"peerDependencies": {
