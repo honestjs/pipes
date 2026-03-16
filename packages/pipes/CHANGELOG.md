@@ -1,5 +1,15 @@
 # @honestjs/pipes
 
+## 1.2.0
+
+### Minor Changes
+
+- 1f6db6f: Update dependencies and add testing setup for filters
+
+### Patch Changes
+
+- ae3b821: Update honestjs dependency to version 0.1.11
+
 ## 1.1.0
 
 ### Minor Changes
