@@ -36,8 +36,8 @@ importers:
   packages/class-validator-pipe:
     dependencies:
       http-essentials:
-        specifier: ^1.3.1
-        version: 1.3.1(typescript@5.9.3)
+        specifier: ^1.4.0
+        version: 1.4.0(typescript@5.9.3)
     devDependencies:
       class-transformer:
         specifier: ^0.5.1
@@ -46,8 +46,11 @@ importers:
         specifier: ^0.14.4
         version: 0.14.4
       honestjs:
-        specifier: ^0.1.11
-        version: 0.1.11(hono@4.8.4)(reflect-metadata@0.2.2)(typescript@5.9.3)
+        specifier: ^0.1.13
+        version: 0.1.13(hono@4.12.8)(reflect-metadata@0.2.2)(typescript@5.9.3)
+      hono:
+        specifier: ^4.12.8
+        version: 4.12.8
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
@@ -58,12 +61,12 @@ importers:
   packages/pipes:
     dependencies:
       http-essentials:
-        specifier: ^1.3.1
-        version: 1.3.1(typescript@5.9.3)
+        specifier: ^1.4.0
+        version: 1.4.0(typescript@5.9.3)
     devDependencies:
       honestjs:
-        specifier: ^0.1.11
-        version: 0.1.11(hono@4.8.4)(reflect-metadata@0.2.2)(typescript@5.9.3)
+        specifier: ^0.1.13
+        version: 0.1.13(hono@4.12.8)(reflect-metadata@0.2.2)(typescript@5.9.3)
       vitest:
         specifier: ^3.2.4
         version: 3.2.4(@types/node@24.12.0)(yaml@2.8.2)
@@ -721,21 +724,21 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  honestjs@0.1.11:
-    resolution: {integrity: sha512-yTJ5YArsjCYUmf60XrPHTvQWVpk4cPdO+V/1ZvtzW0B6Obx3WtJeA7dXYfRt/2Wb2At4m4G+Zde6pwDQQ7icIg==}
+  honestjs@0.1.13:
+    resolution: {integrity: sha512-S0s//DSCRE4URIh919Y1W+f5axYsDucnLTPe5/YkfGB8FDsJitY1Z4Z5Q6wrkTEv2ROzL+LkXKewECHFkeeLZA==}
     peerDependencies:
-      hono: ^4.8.5
+      hono: ^4.8.4
       reflect-metadata: ^0.2.2
       typescript: ^5.8.3
 
-  hono@4.8.4:
-    resolution: {integrity: sha512-KOIBp1+iUs0HrKztM4EHiB2UtzZDTBihDtOF5K6+WaJjCPeaW4Q92R8j63jOhvJI5+tZSMuKD9REVEXXY9illg==}
+  hono@4.12.8:
+    resolution: {integrity: sha512-VJCEvtrezO1IAR+kqEYnxUOoStaQPGrCmX3j4wDTNOcD1uRPFpGlwQUIW8niPuvHXaTUxeOUl5MMDGrl+tmO9A==}
     engines: {node: '>=16.9.0'}
 
-  http-essentials@1.3.1:
-    resolution: {integrity: sha512-++QEH1sTD62QZsPLNNze5I+cuJtpXd+97kAmN8X1nJxANj21n++WdrH6yOVuNV78HOgpAz1zkoB3qqAeO1dVfw==}
+  http-essentials@1.4.0:
+    resolution: {integrity: sha512-opDPHszSbQl+89R8yvQgVbKZg+0WhhhwPvk20Ao8BKYtnXciwpaIdLs3EP0lgoH/uOJaPfpzwKQu8HsGkGMuRQ==}
     peerDependencies:
-      typescript: ^5
+      typescript: ^5.8.2
 
   human-id@4.1.3:
     resolution: {integrity: sha512-tsYlhAYpjCKa//8rXZ9DqKEawhPoSytweBC2eNvcaDK+57RZLHGqNs3PZTQO6yekLFSuvA6AlnAfrw1uBvtb+Q==}
@@ -1940,15 +1943,15 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  honestjs@0.1.11(hono@4.8.4)(reflect-metadata@0.2.2)(typescript@5.9.3):
+  honestjs@0.1.13(hono@4.12.8)(reflect-metadata@0.2.2)(typescript@5.9.3):
     dependencies:
-      hono: 4.8.4
+      hono: 4.12.8
       reflect-metadata: 0.2.2
       typescript: 5.9.3
 
-  hono@4.8.4: {}
+  hono@4.12.8: {}
 
-  http-essentials@1.3.1(typescript@5.9.3):
+  http-essentials@1.4.0(typescript@5.9.3):
     dependencies:
       typescript: 5.9.3
 
