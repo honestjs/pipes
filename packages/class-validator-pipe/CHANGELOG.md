@@ -1,5 +1,11 @@
 # @honestjs/class-validator-pipe
 
+## 1.3.2
+
+### Patch Changes
+
+- 7156314: Update dependencies
+
 ## 1.3.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @honestjs/pipes
 
+## 1.2.2
+
+### Patch Changes
+
+- 7156314: Update dependencies
+
 ## 1.2.1
 
 ### Patch Changes
